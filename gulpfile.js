@@ -37,7 +37,7 @@ gulp.task( 'scss', function() {
 		// An identity sourcemap will be generated at this step
 		.pipe( sourcemaps.identityMap() )
 		.pipe( plumber() )
-		.pipe( concat( 'style.css' ) )
+		.pipe( concat( 'style.min.css' ) )
 		.pipe( sass().on( 'error', sass.logError ) )
 		.pipe( autoprefixer( 'last 2 versions', '> 5%', 'not ie 6-9') )
 		.pipe( cssnano() )

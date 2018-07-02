@@ -4,10 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="../css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="./css/style.min.css" type="text/css" media="all" />
 	<title>Converor tiempos natación piscina 25 metros y piscina 50 metros</title>
 </head>
 <body>
+
+	<div class="cl-container">
+
 
 	<form method="post" enctype="application/x-www-form-urlencoded" action="#">
 		<div align="center">
@@ -84,7 +87,7 @@
 		<em>(Ejemplo: 1:24.25)</em><br />
 		<br />
 		<br />
-		<input name="button" type ="button" onclick="convertir(this.form)" value="Convertir tiempo" />
+		<input name="button" type ="button" value="Convertir tiempo" id="js-cl-calculate" />
 		<br />
 		<br />
 		<h5 style="text-align: center; font-family: Tahoma, Geneva, sans-serif;">Tiempo convertido, según piscina y crono:</h5>
@@ -95,23 +98,25 @@
 		</tr>
 		<tr>
 		<td style="border-top: 1px dotted #eee;">Piscina <strong>50 metros</strong>, cronómetro <strong>manual</strong>:</td>
-		<td style="border-top: 1px dotted #eee; font-style:italic" id="salida1"></td>
+		<td style="border-top: 1px dotted #eee; font-style:italic" id="js-cl-50m"></td>
 		</tr>
 		<tr>
 		<td style="border-top: 1px dotted #eee;">Piscina <strong>50 metros</strong>, cronómetro <strong>electrónico</strong>:</td>
-		<td style="border-top: 1px dotted #eee; font-style:italic" id="salida2"></td>
+		<td style="border-top: 1px dotted #eee; font-style:italic" id="js-cl-50e"></td>
 		</tr>
 		<tr>
 		<td style="border-top: 1px dotted #eee;">Piscina <strong>25 metros</strong>, cronómetro <strong>manual</strong>:</td>
-		<td style="border-top: 1px dotted #eee; font-style:italic" id="salida3"></td>
+		<td style="border-top: 1px dotted #eee; font-style:italic" id="js-cl-25m"></td>
 		</tr>
 		<tr>
 		<td style="border-top: 1px dotted #eee;">Piscina <strong>25 metros</strong>, cronómetro <strong>electrónico</strong>:</td>
-		<td style="border-top: 1px dotted #eee; font-style:italic" id="salida4"></td>
+		<td style="border-top: 1px dotted #eee; font-style:italic" id="js-cl-25e"></td>
 		</tr>
 	</table>
 	</form>
 
-	<script src='./js/conversor.js'></script>
+	</div>
+
+	<script src='./js/conversor.min.js'></script>
 </body>
 </html>

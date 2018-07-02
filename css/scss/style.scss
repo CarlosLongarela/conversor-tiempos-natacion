@@ -1,0 +1,12 @@
+$color-fondo: #a9e2f3;
+
+body {
+	background-color: $color-fondo;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2em;
+	padding: 2em;
+}
+
+.cl-container {
+	border: 1px solid #ccc;
+}

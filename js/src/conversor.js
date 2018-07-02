@@ -21,113 +21,139 @@
 //DE 25 A 50 SE SUMAN LOS VALORES DE LAS TABLAS
 //SI EL TIEMPO ES EN ELECTRONICO
 var e = [];
- e[0]  = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
- e[1]  = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
- e[2]  = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
- e[3]  = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
- e[4]  = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
+
+e[0] = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
+e[1] = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
+e[2] = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
+e[3] = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
+e[4] = [ 29, 19, 19, 19, 19, 19, 29, 19, 19 ];
 
 var m = [];
- m[0]  = [  70, 160, 340,  720, 1570, 2950, 280, 640, 1360 ];
- m[1]  = [ 110, 250, 570,    0,    0,    0,   0,   0,    0 ];
- m[2]  = [  80, 230, 600,    0,    0,    0,   0,   0,    0 ];
- m[3]  = [  30, 130, 310,    0,    0,    0,   0,   0,    0 ];
- m[4]  = [   0,   0, 490, 1000,    0,    0, 290, 770,    0 ];
+
+m[0] = [  70, 160, 340,  720, 1570, 2950, 280, 640, 1360 ];
+m[1] = [ 110, 250, 570,    0,    0,    0,   0,   0,    0 ];
+m[2] = [  80, 230, 600,    0,    0,    0,   0,   0,    0 ];
+m[3] = [  30, 130, 310,    0,    0,    0,   0,   0,    0 ];
+m[4] = [   0,   0, 490, 1000,    0,    0, 290, 770,    0 ];
 
 var f = [];
-f[0]   = [  40, 100, 240, 520, 1190, 2230, 160, 400, 960 ];
-f[1]   = [ 100, 220, 570,   0,    0,    0,   0,   0,   0 ];
-f[2]   = [  60, 200, 450,   0,    0,    0,   0,   0,   0 ];
-f[3]   = [  30,  80, 240,   0,    0,    0,   0,   0,   0 ];
-f[4]   = [   0,   0, 310, 750,    0,    0, 230, 600,   0 ];
+f[0] = [  40, 100, 240, 520, 1190, 2230, 160, 400, 960 ];
+f[1] = [ 100, 220, 570,   0,    0,    0,   0,   0,   0 ];
+f[2] = [  60, 200, 450,   0,    0,    0,   0,   0,   0 ];
+f[3] = [  30,  80, 240,   0,    0,    0,   0,   0,   0 ];
+f[4] = [   0,   0, 310, 750,    0,    0, 230, 600,   0 ];
 
 //SI EL TIEMPO ES EN MANUAL SE LE SUMA 19 O 29 SEGUN PRUEBA
 
-function darformato( t ) {
-	minutos = Math.floor( t / 6000 );
-	segundos = Math.floor( ( t - ( minutos * 6000 ) ) / 100 );
-	centesimas = t - ( minutos * 6000 ) - ( segundos * 100 );
+function format_times( t ) {
+	var minutes    = Math.floor( t / 6000 );
+	var seconds    = Math.floor( ( t - ( minutes * 6000 ) ) / 100 );
+	var hundredths = t - ( minutes * 6000 ) - ( seconds * 100 );
+	var result     = '';
 
-	minutos = ( minutos < 10 && minutos > -1 ) ? "0" + minutos : minutos;
-	segundos = ( segundos < 10 && segundos > -1 )?"0" + segundos : segundos;
-	centesimas = ( centesimas < 10 && centesimas > -1 ) ? "0" + centesimas : centesimas;
+	minutes    = ( minutes < 10 && minutes > -1 ) ? '0' + minutes : minutes;
+	seconds    = ( seconds < 10 && seconds > -1 )? '0' + seconds : seconds;
+	hundredths = ( hundredths < 10 && hundredths > -1 ) ? '0' + hundredths : hundredths;
 
-	return minutos + ":" + segundos + "." + centesimas + "<br \/>";
+	result = minutes + ':' + seconds + '.' + hundredths;
+
+	return result;
 }
 
-function convertir( form ) {
-	var tiempo = 0;
+function convertir() {
+	var time = 0;
 	var minutos = 0;
 	var segundos = 0;
 	var centesimas = 0;
-	var tiempo50M = 0, tiempo50E = 0, tiempo25M = 0, tiempo25E = 0;
+	var time_50m = 0;
+	var time_50e = 0;
+	var time_25m = 0;
+	var time_25e = 0;
 	var salida = "";
 
-	tiempo = ( isNaN( parseInt( form.minutos.value, 10 ) ) ? 0 : parseInt( form.minutos.value, 10 ) * 6000 )
-			+ ( isNaN( parseInt( form.segundos.value, 10 ) ) ? 0 : parseInt( form.segundos.value, 10 ) * 100 )
-			+ ( isNaN( parseInt( form.centesimas.value, 10 ) ) ? 0 : parseInt( form.centesimas.value, 10 ) );
+	var minutes_value    = document.getElementById( 'minutos' ).value;
+	var seconds_value    = document.getElementById( 'segundos' ).value;
+	var hundredths_value = document.getElementById( 'centesimas' ).value;
+	var style_value      = document.getElementById( 'estilo' ).value;
+	var distance_value   = document.getElementById( 'prueba' ).value;
+
+	time = ( isNaN( parseInt( minutes_value, 10 ) ) ? 0 : parseInt( minutes_value, 10 ) * 6000 )
+			+ ( isNaN( parseInt( seconds_value, 10 ) ) ? 0 : parseInt( seconds_value, 10 ) * 100 )
+			+ ( isNaN( parseInt( hundredths_value, 10 ) ) ? 0 : parseInt( hundredths_value, 10 ) );
 
 
 	//Estilo,prueba, Sexo, piscina, cronometro
 	if ( document.getElementById( 'crono_0' ).checked ) {//form.crono.value == "M") {//MANUAL
 		if ( document.getElementById( 'piscina_1' ).checked ) {//form.crono.value == "25") {//PISCINA DE 25 + MANUAL
 			if ( document.getElementById( 'sexo_0' ).checked ) {//form.crono.value == "M") {//MASCULINO + PISCINA DE 25 + MANUAL
-				tiempo50M = tiempo + m[ form.estilo.value ][ form.prueba.value ];
-				tiempo50E = tiempo + m[ form.estilo.value ][ form.prueba.value ] + e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25M = tiempo;
-				tiempo25E = tiempo + e[ form.estilo.value ][ form.prueba.value ];
+				time_50m = time + m[ style_value ][ distance_value ];
+				time_50e = time + m[ style_value ][ distance_value ] + e[ style_value ][ distance_value ];
+				time_25m = time;
+				time_25e = time + e[ style_value ][ distance_value ];
 			} else { //FEMENINO + PISCINA DE 25 + MANUAL
-				tiempo50M = tiempo + f[ form.estilo.value ][ form.prueba.value ];
-				tiempo50E = tiempo + f[ form.estilo.value ][ form.prueba.value ] + e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25M = tiempo;
-				tiempo25E = tiempo + e[ form.estilo.value ][ form.prueba.value ];
+				time_50m = time + f[ style_value ][ distance_value ];
+				time_50e = time + f[ style_value ][ distance_value ] + e[ style_value ][ distance_value ];
+				time_25m = time;
+				time_25e = time + e[ style_value ][ distance_value ];
 			}
 		} else {
 			if (document.getElementById( 'sexo_0' ).checked ) {//form.crono.value == "M") {//MASCULINO + PISCINA DE 50 + MANUAL
-				tiempo50M = tiempo;
-				tiempo50E = tiempo + e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25M = tiempo - m[ form.estilo.value ][ form.prueba.value ];
-				tiempo25E = tiempo - m[ form.estilo.value ][ form.prueba.value ] + e[ form.estilo.value ][ form.prueba.value ];
+				time_50m = time;
+				time_50e = time + e[ style_value ][ distance_value ];
+				time_25m = time - m[ style_value ][ distance_value ];
+				time_25e = time - m[ style_value ][ distance_value ] + e[ style_value ][ distance_value ];
 			}else {//FEMENINO + PISCINA DE 50 + MANUAL
-				tiempo50M = tiempo;
-				tiempo50E = tiempo + e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25M = tiempo - f[ form.estilo.value ][ form.prueba.value ];
-				tiempo25E = tiempo - f[ form.estilo.value ][ form.prueba.value ] + e[ form.estilo.value ][ form.prueba.value ];
+				time_50m = time;
+				time_50e = time + e[ style_value ][ distance_value ];
+				time_25m = time - f[ style_value ][ distance_value ];
+				time_25e = time - f[ style_value ][ distance_value ] + e[ style_value ][ distance_value ];
 			}
 		}
 	} else {//ELECTRONICO
 		if ( document.getElementById( 'piscina_1' ).checked ) { //form.crono.value == "25") {//PISCINA DE 25 + ELECTRONICO
 			if ( document.getElementById( 'sexo_0' ).checked ) { //form.crono.value == "M") {//MASCULINO + PISCINA DE 25 + ELECTRONICO
-				tiempo50M = tiempo + m[ form.estilo.value ][ form.prueba.value ] - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo50E = tiempo + m[ form.estilo.value ][ form.prueba.value ];
-				tiempo25M = tiempo - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25E = tiempo;
+				time_50m = time + m[ style_value ][ distance_value ] - e[ style_value ][ distance_value ];
+				time_50e = time + m[ style_value ][ distance_value ];
+				time_25m = time - e[ style_value ][ distance_value ];
+				time_25e = time;
 			} else { //FEMENINO + PISCINA DE 25 + ELECTRONICO
-				tiempo50M = tiempo + f[ form.estilo.value ][ form.prueba.value ] - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo50E = tiempo + f[ form.estilo.value ][ form.prueba.value ];
-				tiempo25M = tiempo - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25E = tiempo;
+				time_50m = time + f[ style_value ][ distance_value ] - e[ style_value ][ distance_value ];
+				time_50e = time + f[ style_value ][ distance_value ];
+				time_25m = time - e[ style_value ][ distance_value ];
+				time_25e = time;
 			}
 		} else { //PISCINA DE 50
 			if ( document.getElementById( 'sexo_0' ).checked ) {//form.crono.value == "M") {//MASCULINO + PISCINA DE 50 + ELECTRONICO
-				tiempo50M = tiempo - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo50E = tiempo;
-				tiempo25M = tiempo - m[ form.estilo.value ][ form.prueba.value ] - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25E = tiempo - m[ form.estilo.value ][ form.prueba.value ];
+				time_50m = time - e[ style_value ][ distance_value ];
+				time_50e = time;
+				time_25m = time - m[ style_value ][ distance_value ] - e[ style_value ][ distance_value ];
+				time_25e = time - m[ style_value ][ distance_value ];
 			} else {//FEMENINO + PISCINA DE 50 + ELECTRONICO
-				tiempo50M = tiempo - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo50E = tiempo;
-				tiempo25M = tiempo - f[ form.estilo.value ][ form.prueba.value ] - e[ form.estilo.value ][ form.prueba.value ];
-				tiempo25E = tiempo - f[ form.estilo.value ][ form.prueba.value ];
+				time_50m = time - e[ style_value ][ distance_value ];
+				time_50e = time;
+				time_25m = time - f[ style_value ][ distance_value ] - e[ style_value ][ distance_value ];
+				time_25e = time - f[ style_value ][ distance_value ];
 			}
 		}
 	}
 /*    salida = "Tiempo en piscina de <strong>50 metros</strong>, cronómetro <strong>manual</strong>: <strong>"+ darformato(tiempo50M)+"</strong>";
-	salida += "Tiempo en piscina de <strong>50 metros</strong>, cronómetro <strong>electrónico</strong>: <strong>"+ darformato(tiempo50E)+"</strong>";
-	salida += "Tiempo en piscina de <strong>25 metros</strong>, cronómetro <strong>manual</strong>: <strong>"+ darformato(tiempo25M)+"</strong>";
-	salida += "Tiempo en piscina de <strong>25 metros</strong>, cronómetro <strong>electrónico</strong>: <strong>"+ darformato(tiempo25E)+"</strong>";*/
-	document.getElementById( 'salida1' ).innerHTML = darformato( tiempo50M );
-	document.getElementById( 'salida2' ).innerHTML = darformato( tiempo50E );
-	document.getElementById( 'salida3' ).innerHTML = darformato( tiempo25M );
-	document.getElementById( 'salida4' ).innerHTML = darformato( tiempo25E );
+	salida += "Tiempo en piscina de <strong>50 metros</strong>, cronómetro <strong>electrónico</strong>: <strong>"+ darformato(time_50e)+"</strong>";
+	salida += "Tiempo en piscina de <strong>25 metros</strong>, cronómetro <strong>manual</strong>: <strong>"+ darformato(time_25m)+"</strong>";
+	salida += "Tiempo en piscina de <strong>25 metros</strong>, cronómetro <strong>electrónico</strong>: <strong>"+ darformato(time_25e)+"</strong>";*/
+	document.getElementById( 'js-cl-50m' ).innerHTML = format_times( time_50m );
+	document.getElementById( 'js-cl-50e' ).innerHTML = format_times( time_50e );
+	document.getElementById( 'js-cl-25m' ).innerHTML = format_times( time_25m );
+	document.getElementById( 'js-cl-25e' ).innerHTML = format_times( time_25e );
 }
+
+function convertir2() {
+	console.log( 'Pulsado' );
+}
+// Function to add event listener to t
+function cl_load() {
+	var btn = document.getElementById( 'js-cl-calculate' );
+
+	btn.addEventListener( 'click', convertir, false );
+}
+
+document.addEventListener( 'DOMContentLoaded', cl_load, false );
