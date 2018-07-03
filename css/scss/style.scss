@@ -1,0 +1,150 @@
+$color-fondo: #a9e2f3;
+$color-slider-1: #058605;
+$color-slider-2: #1642bd;
+
+$slider-margin: 4px;
+$slider-width: 50px;
+$slider-height: ( $slider-width / 2 ) + $slider-margin;
+
+
+body {
+	background-color: $color-fondo;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+.cl-container {
+	border: 1px solid #ccc;
+}
+
+.cl-slider-checked,
+.cl-slider-unchecked {
+	font-weight: 600;
+	font-size: 1.4em;
+}
+
+.cl-slider-checked {
+	color: $color-slider-2;
+}
+
+.cl-slider-unchecked {
+	color: $color-slider-1;
+}
+
+.cl-slider,
+.cl-select,
+.cl-time {
+	text-align: center;
+	margin-bottom: 1.3em;
+}
+
+.cl-select,
+.cl-time {
+	label {
+		font-weight: 600;
+		font-size: 1.4em;
+		color: $color-slider-1;
+	}
+
+	select {
+		border-radius: 8px;
+		padding: 5px 10px;
+		font-size: 1.4em;
+	}
+}
+
+.cl-time {
+	span {
+		font-weight: 600;
+		font-size: 1.4em;
+		color: $color-slider-1;
+	}
+
+	label {
+		display: block;
+	}
+
+	input[type=number] {
+		font-size: 1.4em;
+		width: 2em;
+		padding: 5px 10px;
+	}
+}
+
+.switch {
+	margin-left: ( 2 * $slider-margin );
+	margin-right: ( 2 * $slider-margin );
+	position: relative;
+	display: inline-block;
+	width: $slider-width;
+	height: $slider-height;
+	vertical-align: bottom;
+
+	input {
+		display:none;
+	}
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $color-slider-1;
+	-webkit-transition: .4s;
+	transition: .4s;
+
+	&:before {
+		position: absolute;
+		content: "";
+		height: ( $slider-width / 2 ) - $slider-margin;
+		width: ( $slider-width / 2 ) - $slider-margin;
+		left: $slider-margin;
+		bottom: $slider-margin;
+		background-color: white;
+		-webkit-transition: .4s;
+		transition: .4s;
+	}
+}
+
+input:checked + .slider {
+	background-color: $color-slider-2;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px $color-slider-2;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX( ( $slider-width / 2 ) - $slider-margin );
+	-ms-transform: translateX( ( $slider-width / 2 ) - $slider-margin );
+	transform: translateX( ( $slider-width / 2 ) - $slider-margin );
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: $slider-height;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+.container {
+	position: relative;
+	display: inline-block;
+}
+
+.cl-info {
+	display: none;
+}
+
+.cl-copy {
+	text-align: right;
+	font-size: 0.8em;
+	font-style: italic;
+	position: absolute;
+	bottom: 2px;
+}

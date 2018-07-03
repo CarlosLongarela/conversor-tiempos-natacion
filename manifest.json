@@ -1,0 +1,25 @@
+{
+  "short_name": "Conversor Natación",
+  "name": "Conversor tiempos natación",
+  "icons": [
+    {
+      "src": "./icons/swimming-conversor-48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "./icons/swimming-conversor-96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "./icons/swimming-conversor-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#a9e2f3",
+  "start_url": "index.html?launcher=true"
+}
