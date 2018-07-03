@@ -136,3 +136,15 @@ input:checked + .slider:before {
 	position: relative;
 	display: inline-block;
 }
+
+.cl-info {
+	display: none;
+}
+
+.cl-copy {
+	text-align: right;
+	font-size: 0.8em;
+	font-style: italic;
+	position: absolute;
+	bottom: 2px;
+}
