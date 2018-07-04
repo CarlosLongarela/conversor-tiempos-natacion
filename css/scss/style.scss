@@ -1,3 +1,4 @@
+$color-textos: #454545;
 $color-fondo: #a9e2f3;
 $color-slider-1: #058605;
 $color-slider-2: #1642bd;
@@ -9,8 +10,15 @@ $slider-height: ( $slider-width / 2 ) + $slider-margin;
 
 body {
 	background-color: $color-fondo;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1em;
+	/*font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;*/
+
+	font-weight: 300;
+	font-size: 1rem;
+	line-height: 1.5em;
+	font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	color: $color-textos;
+	margin: 0;
 }
 
 .cl-container {
