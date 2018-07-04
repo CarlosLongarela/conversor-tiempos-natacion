@@ -8,6 +8,7 @@ var gulp         = require( 'gulp' ),
 	notify       = require( 'gulp-notify' ),
 	sourcemaps   = require( 'gulp-sourcemaps' );
 
+
 var JS = [
 	'./js/src/conversor.js',
 ];
@@ -27,11 +28,15 @@ gulp.task( 'scripts', function() {
 		.pipe( uglify() )
 		.pipe( sourcemaps.write( './maps' ) )
 		.pipe( gulp.dest( 'js' ) )
-		.pipe( notify( { message: 'Script .min creado' } ) );
+		.pipe( notify( {
+			title: 'Resultado tarea Gulp scripts:',
+			message: 'Script .min creado',
+			onLast: true
+		} ) );
 } );
 
 /** SCSS Tasks */
-gulp.task( 'scss', function() {
+gulp.task( 'styles', function() {
 	return gulp.src( SCSS )
 		.pipe( sourcemaps.init() )
 		// An identity sourcemap will be generated at this step
@@ -43,16 +48,22 @@ gulp.task( 'scss', function() {
 		.pipe( cssnano() )
 		.pipe( sourcemaps.write( './maps' ) )
 		.pipe( gulp.dest( 'css' ) )
-		.pipe( notify( { message: 'CSS creado' } ) );
+		.pipe( notify( {
+			title: 'Resultado tarea Gulp styles:',
+			message: 'CSS creado',
+			onLast: true
+		} ) );
 } );
 
 
 gulp.task( 'watch', function() {
 	// Inspect changes in js files.
-	gulp.watch( JS, ['scripts'] );
+	gulp.watch( JS, gulp.series( 'scripts' ) );
 
 	// Inspect changes in scss files.
-	gulp.watch( SCSS, ['scss'] );
+	gulp.watch( SCSS, gulp.series( 'styles' ) );
 } );
 
-gulp.task( 'default', [ 'scripts', 'scss', 'watch' ] );
+//gulp.task( 'default', [ 'scripts', 'scss', 'watch' ] );
+
+gulp.task( 'default', gulp.parallel( 'styles', 'scripts' ) );
