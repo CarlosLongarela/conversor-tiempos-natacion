@@ -129,6 +129,15 @@ function convertir() {
 	document.getElementById( 'js-cl-25e' ).innerHTML = format_times( time_25e );
 }
 
+function show_hide_info() {
+	var info_div = document.getElementById( 'js-cl-info' );
+ console.log('HOLA');
+	if ( 'hidden' === info_div.dataset.state ) {
+		info_div.dataset.state = 'visible';
+	} else {
+		info_div.dataset.state = 'hidden';
+	}
+}
 
 function cl_load() {
 	var sex        = document.getElementById( 'js-cl-sex-male' );
@@ -139,6 +148,7 @@ function cl_load() {
 	var minutes    = document.getElementById( 'minutes' );
 	var seconds    = document.getElementById( 'seconds' );
 	var hundredths = document.getElementById( 'hundredths' );
+	var info       = document.getElementById( 'js-cl-more-info' );
 
 	convertir(); // Primera conversión con el tiempo por defecto.
 
@@ -150,6 +160,8 @@ function cl_load() {
 	minutes.addEventListener( 'change', convertir, false );
 	seconds.addEventListener( 'change', convertir, false );
 	hundredths.addEventListener( 'change', convertir, false );
+
+	info.addEventListener( 'click', show_hide_info, false );
 }
 
 document.addEventListener( 'DOMContentLoaded', cl_load, false );
