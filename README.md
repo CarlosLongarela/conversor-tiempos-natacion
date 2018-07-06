@@ -1,5 +1,5 @@
 # Conversor tiempos natación
-Conversor tiempos natación entre piscina de 25m y 50m y cronometraje manual y electrónico.
+Conversor de tiempos natación entre piscina de 25m y 50m y cronometraje manual y electrónico.
 
 Idea original de http://www.lacorchera.com/conversor-2/
 
