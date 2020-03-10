@@ -18,12 +18,15 @@ var filesToCache = [
 	'./',
 	'./index.html',
 	'./js/conversor.min.js',
-	'./styles/style.min.css'
+	'./css/styles.min.css',
+	'./icons/swimming-conversor-144.png',
+	'./icons/swimming-conversor-152.png',
+	'./icons/swimming-conversor-512.png'
 ];
 
-self.addEventListener( 'install', function( e ) {
+self.addEventListener( 'install', function( event ) {
 	console.log( '[ServiceWorker] Install' );
-	e.waitUntil(
+	event.waitUntil(
 		caches.open( cacheName ).then( function( cache ) {
 			console.log( '[ServiceWorker] Caching app shell' );
 
@@ -32,9 +35,10 @@ self.addEventListener( 'install', function( e ) {
 	);
 } );
 
-self.addEventListener( 'activate', function( e ) {
+
+self.addEventListener( 'activate', function( event ) {
 	console.log( '[ServiceWorker] Activate' );
-	e.waitUntil(
+	event.waitUntil(
 		caches.keys().then( function( keyList ) {
 			return Promise.all( keyList.map( function( key ) {
 				if ( key !== cacheName && key !== dataCacheName ) {
@@ -59,3 +63,23 @@ self.addEventListener( 'activate', function( e ) {
 } );
 
 
+
+self.addEventListener( 'fetch', function( event ) {
+	console.log( 'URL: ' + event.request.url );
+	if ( ! ( 0 === event.request.url.indexOf( 'http' ) ) ) {
+		console.log( 'SI' );
+		return;
+	}
+
+	event.respondWith(
+		caches.open( cacheName ).then( function( cache ) {
+			return cache.match( event.request ).then( function( response ) {
+				var fetchPromise = fetch( event.request ).then( function( networkResponse ) {
+					cache.put( event.request, networkResponse.clone() );
+					return networkResponse;
+				} );
+				return response || fetchPromise;
+			} );
+		} )
+	);
+} );
