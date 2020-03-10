@@ -1,6 +1,7 @@
 {
-  "short_name": "Conversor Natación",
+  "short_name": "SwimmingTime",
   "name": "Conversor tiempos natación",
+  "background_color": "#fff",
   "icons": [
     {
       "src": "./icons/swimming-conversor-48.png",
@@ -16,6 +17,11 @@
       "src": "./icons/swimming-conversor-192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "./icons/swimming-conversor-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "display": "standalone",

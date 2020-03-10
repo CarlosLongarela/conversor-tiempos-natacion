@@ -4,13 +4,23 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="./css/style.min.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="./css/styles.min.css" type="text/css" media="all" />
 	<link rel="manifest" href="./manifest.json">
+	<link rel="icon" type="image/png" href="./icons/swimming-conversor-152.png" />
+	<!-- Add to home screen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Conversor tiempos natación">
+	<link rel="apple-touch-icon" href="./icons/swimming-conversor-152.png">
+	<meta name="msapplication-TileImage" content="./icons/swimming-conversor-144.png">
+  <meta name="msapplication-TileColor" content="#1642bd">
+  <meta name="theme-color" content="#1642bd"/>
 	<title>Converor tiempos natación piscina 25 metros y piscina 50 metros</title>
+	<meta name="Description" content="Converor tiempos natación entre piscina de 25 metros y piscina de 50 metros, cronometraje manual y electrónico y los diferentes estilos.">
 </head>
 <body>
 
-	<div class="cl-container">
+	<main class="cl-container">
 
 		<div class="cl-slider">
 			<span class="cl-slider-unchecked">Femenino</span>
@@ -71,8 +81,10 @@
 			<label for="minutes">Tiempo a convertir:</label>
 			<input name="minutes" type="number" id="minutes" value="1" size="1" min="0" max="59" step="1" maxlength="2" />
 			<span>:</span>
+			<label for="seconds" class="cl-hidden">segundos</label>
 			<input name="seconds" type="number" id="seconds" value="00" size="1" min="0" max="59" step="1" maxlength="2" />
 			<span>.</span>
+			<label for="hundredths" class="cl-hidden">centésimas</label>
 			<input name="hundredths" type="number" id="hundredths" value="00" size="1" min="0" max="99" step="1" maxlength="2" />
 		</div>
 
@@ -109,10 +121,17 @@
 
 		<p class="cl-copy">Carlos Longarela, 2018 <a href="https://tabernawp.com">https://tabernawp.com</a>,Licensed under GPL3. Creating websites since 90's. <br /><span id="js-cl-more-info" class="cl-more-info">Más info del conversor</span></p>
 
-		<p class="cl-info" id="js-cl-info" data-state="hidden">Las conversiones de tiempos son realizadas de acuerdo a las normativas del Reglamento General de la RFEN (Temporada 2017-2018) que <a href="http://www.rfen.es/publicacion/userfiles/NAT_00_Normativa_ASPECTOS_GENERALES_2017-2018.pdf">se puede consultar en el siguiente enlace</a> y cuyo punto 3.1 indica <em>Para la conversión de los tiempos realizados en piscina de 25 metros a piscina de 50 metros, se utilizará la tabla que se expresa en el apartado siguiente, sumando al tiempo de piscina de 25 metros, el tiempo expresado en segundos y décimas que se indica en la tabla para la prueba correspondiente. Para la conversión de piscina de 50 m. a 25 m. se aplicará el procedimiento pero inverso.</em>, junto con el punto 3.3 para las conversiones de los cronometrajes en manual y electrónico que indica que <em>La conversión para los tiempos acreditados en forma manual a electrónico se sumará 19 centésimas, excepto para las pruebas de 50 metros que se sumarán <strong>29 centésimas.</strong></em></p>
+		<p class="cl-info" id="js-cl-info" data-state="hidden">PWA <em>(Progressive Web App)</em> original en <a href="https://tabernawp.com/conversor-tiempos-natacion/">https://tabernawp.com/conversor-tiempos-natacion/</a><br />Las conversiones de tiempos son realizadas de acuerdo a las normativas del Reglamento General de la RFEN (Temporada 2017-2021) que <a href="https://cdn.leverade.com/files/rfen_IU8PBD5PDKPP.pdf">se puede consultar en el siguiente enlace</a> y cuyo punto 3.1 indica <em>Para la conversión de los tiempos realizados en piscina de 25 metros a piscina de 50 metros, se utilizará la tabla que se expresa en el apartado siguiente, sumando al tiempo de piscina de 25 metros, el tiempo expresado en segundos y décimas que se indica en la tabla para la prueba correspondiente. Para la conversión de piscina de 50 m. a 25 m. se aplicará el procedimiento pero inverso.</em>, junto con el punto 3.3 para las conversiones de los cronometrajes en manual y electrónico que indica que <em>La conversión para los tiempos acreditados en forma manual a electrónico se sumará 19 centésimas, excepto para las pruebas de 50 metros que se sumarán <strong>29 centésimas.</strong></em></p>
 
-	</div>
+	</main>
 
 	<script src='./js/conversor.min.js'></script>
+	<script>
+	if ( 'serviceWorker' in navigator ) {
+		navigator.serviceWorker
+			.register('service-worker.js')
+			.then( function() { console.log( "Service Worker Registered" ); } );
+	}
+	</script>
 </body>
 </html>
